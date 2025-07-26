@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Countdown Surprise</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: linear-gradient(135deg, #ffe6f7 0%, #f3e7ff 100%);
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+      }
+      .floating {
+        position: absolute;
+        animation: float 6s linear infinite;
+        opacity: 0.3;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(60px);
+        }
+      }
+      .card {
+        background: #fff;
+        border-radius: 1.5rem;
+        box-shadow: 0 8px 32px rgba(220, 38, 120, 0.12);
+        padding: 2rem 1.5rem;
+        text-align: center;
+        max-width: 400px;
+        margin: auto;
+        position: relative;
+        z-index: 2;
+      }
+      .count-title {
+        font-family: "Pacifico", cursive;
+        font-size: 2rem;
+        color: #d946ef;
+        margin-bottom: 1rem;
+      }
+      .timer-box {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .timer-item {
+        background: #ffe6f7;
+        border-radius: 1rem;
+        padding: 1rem 0.75rem;
+        min-width: 70px;
+        box-shadow: 0 2px 8px rgba(220, 38, 120, 0.08);
+      }
+      .timer-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #d946ef;
+      }
+      .timer-label {
+        font-size: 0.9rem;
+        color: #a21caf;
+        margin-top: 0.2rem;
+      }
+      .sweet-msg {
+        background: #ffe6f7;
+        border-radius: 1rem;
+        padding: 1rem;
+        margin-top: 1.5rem;
+        color: #d946ef;
+        font-family: "Pacifico", cursive;
+        font-size: 1.1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Add at the top of <body> in every page -->
+<audio controls autoplay loop style="width:100%; position:fixed; top:0; left:0; z-index:999;">
+  <source src="song.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+    <!-- Floating hearts and dots -->
+    <div id="floating-icons"></div>
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="card">
+        <div class="count-title">Your Special Day is Almost Here 💕</div>
+        <div class="timer-box">
+          <div class="timer-item">
+            <div class="timer-value" id="days">0</div>
+            <div class="timer-label">Days <span>💗</span></div>
+          </div>
+          <div class="timer-item">
+            <div class="timer-value" id="hours">0</div>
+            <div class="timer-label">Hours <span>🎁</span></div>
+          </div>
+          <div class="timer-item">
+            <div class="timer-value" id="minutes">0</div>
+            <div class="timer-label">Minutes <span>⏰</span></div>
+          </div>
+          <div class="timer-item">
+            <div class="timer-value" id="seconds">0</div>
+            <div class="timer-label">Seconds <span>⭐</span></div>
+          </div>
+        </div>
+        <div class="sweet-msg">
+          Just a little more... A small gift for my favorite person
+          <span>❤️</span>
+          <div class="flex justify-center mt-2">
+            <span class="mx-1 text-pink-400">●</span>
+            <span class="mx-1 text-pink-400">●</span>
+            <span class="mx-1 text-pink-400">●</span>
+          </div>
+          <div class="flex justify-center mt-4">
+            <button
+              onclick="window.location.href='surprise-image.html'"
+              class="bg-gradient-to-r from-pink-400 to-purple-500 text-white font-bold py-2 px-6 rounded-full shadow-md hover:scale-105 transition-transform"
+            >
+              Click Me
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Floating hearts and dots
+      const icons = ["💗", "💜", "💛", "⭐", "💖", "💙", "💚", "💝", "●", "●"];
+      const container = document.getElementById("floating-icons");
+      for (let i = 0; i < 18; i++) {
+        const icon = document.createElement("span");
+        icon.className = "floating";
+        icon.style.left = Math.random() * 95 + "vw";
+        icon.style.top = Math.random() * 80 + "vh";
+        icon.style.fontSize = Math.random() * 1.5 + 1 + "rem";
+        icon.style.animationDelay = Math.random() * 4 + "s";
+        icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+        container.appendChild(icon);
+      }
+
+      // Countdown logic (set your target date here)
+      const targetDate = new Date();
+      targetDate.setSeconds(targetDate.getSeconds() + 10); // Example: 10 seconds from now
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
+        if (diff <= 0) {
+          document.getElementById("days").textContent = 0;
+          document.getElementById("hours").textContent = 0;
+          document.getElementById("minutes").textContent = 0;
+          document.getElementById("seconds").textContent = 0;
+          return;
+        }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+      }
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
+  </body>
+</html>
