@@ -90,9 +90,16 @@
 </head>
 <body class="bg-gradient-to-br from-pink-100 to-purple-200 min-h-screen flex items-center justify-center p-4">
     <!-- Background music -->
-   
+     <audio
+      controls
+      autoplay
+      loop
+      style="width: 100%; position: fixed; top: 0; left: 0; z-index: 999"
+    >
+      <source src="song.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
+     
     <!-- Animated Hearts -->
     <div class="hearts" id="hearts"></div>
     <!-- Add this container for background behind the card -->
