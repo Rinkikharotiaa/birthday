@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Romantic Surprise</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for romantic style -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            position: relative;
+            overflow-x: hidden;
+            background: #aa4389;
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 120px;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .heart {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: url('https://cdn.pixabay.com/photo/2013/07/12/15/55/heart-150004_1280.png') no-repeat center/contain;
+            animation: floatHeart 6s linear infinite;
+        }
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(80px) scale(1.2); opacity: 0.3; }
+        }
+        .balloon {
+            width: 40px;
+            height: 60px;
+            background: radial-gradient(circle at 60% 40%, #ffb6c1 60%, #ff69b4 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: floatBalloon 3s ease-in-out infinite alternate;
+        }
+        @keyframes floatBalloon {
+            0% { top: 180px; }
+            100% { top: 120px; }
+        }
+        .balloon-string {
+            width: 2px;
+            height: 30px;
+            background: #888;
+            position: absolute;
+            left: 50%;
+            top: 60px;
+            transform: translateX(-50%);
+        }
+        .romantic-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #d946ef;
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+        .love-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5rem;
+            color: #ef067b;
+            margin-bottom: 40px;
+        }
+        .special-message {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.3rem;
+            color: #c710e4;
+            margin-top: 30px;
+            display: none;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .emoji {
+            display: inline-block;
+            animation: pulse 1.2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.18); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-pink-100 to-purple-200 min-h-screen flex items-center justify-center p-4">
+    <!-- Background music -->
+    <audio controls autoplay loop style="width:100%; position:fixed; top:0; left:0; z-index:999;">
+      <source src="song.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <!-- Animated Hearts -->
+    <div class="hearts" id="hearts"></div>
+    <!-- Add this container for background behind the card -->
+    <div class="flex items-center justify-center w-full min-h-screen">
+        <div class="bg-gradient-to-br from-pink-200 via-purple-100 to-pink-100 rounded-3xl shadow-2xl p-8 flex items-center justify-center">
+            <div class="max-w-md w-full bg-white rounded-xl shadow-xl p-6 text-center relative z-20">
+                <div class="romantic-title">Happy Birthday My Jaana 💖</div>
+                <div style="margin-bottom:18px;">
+                    <span class="emoji" style="font-size:2.2rem; animation: pulse 1.2s infinite;">💗</span>
+                    <span class="emoji" style="font-size:2.2rem; animation: pulse 1.5s infinite;">✨</span>
+                    <span class="emoji" style="font-size:2.2rem; animation: pulse 1.8s infinite;">💖</span>
+                    <span class="emoji" style="font-size:2.2rem; animation: pulse 2s infinite;">💜</span>
+                </div>
+                <div class="love-text">I love you my Buggy 🥰</div>
+                <img src="ria.jpg" alt="Surprise" class="rounded-xl shadow-lg w-full max-w-xs mx-auto mb-6">
+                <button id="hitsBtn" class="bg-gradient-to-r from-pink-400 to-purple-500 text-white font-bold py-3 px-8 rounded-full shadow-md hover:scale-105 transition-transform mb-6">
+                    Open It
+                </button>
+                <div id="specialMsg" class="special-message">
+                    You are the reason my heart smiles every day.<br>
+                    Thank you for being my forever, my love, my Buggy!<br>
+                    💖 I am yours, always and forever. 💖
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Animated hearts
+        const heartsContainer = document.getElementById('hearts');
+        for(let i=0; i<12; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random()*90 + 'vw';
+            heart.style.top = Math.random()*40 + 'px';
+            heart.style.animationDelay = (Math.random()*3) + 's';
+            heartsContainer.appendChild(heart);
+        }
+        // Button click to show special message
+        document.getElementById('hitsBtn').onclick = function() {
+            document.getElementById('specialMsg').style.display = 'block';
+            this.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
